@@ -3,23 +3,23 @@
 ## Vashti Gambol
 # PyShiny Basic Dashboard (Penguins) 
 #  Tools
-## .Python
-## .Shiny for Python
-## .VS Code + Python Extension
-## .Git
-## .GitHub
-#Try in the Browser
-Go to PyShiny Templates at https://shiny.posit.co/py/templates/. Go to Dashboards / Basic Dashboard.
+## Python
+## Shiny for Python
+## VS Code + Python Extension
+## Git
+## GitHub
+# Try in the Browser
+### Go to PyShiny Templates at https://shiny.posit.co/py/templates/. Go to Dashboards / Basic Dashboard.
 
-https://shiny.posit.co/py/templates/dashboard/
-Reference App with Detailed Instructions
+### https://shiny.posit.co/py/templates/dashboard/
+# Reference App with Detailed Instructions
 For more detailed instructions, see https://github.com/denisecase/pyshiny-penguins-dashboard-express. That project README.md has more detailed instructions, including reminders for Mac and Linux.
 
-Get the Code
+# Get the Code
 Fork this project into your own GitHub account. Clone your GitHub repo down to your local machine. IMPORTANT: Use your GitHub username in place of denisecase. GitHub CLI may work better on some machines.
 
 git clone https://github.com/denisecase/cintel-07-tdash
-Run Locally - Initial Start
+# Run Locally - Initial Start
 After cloning your project down to your Documents folder, open the project folder for editing in VS Code.
 
 Create a local project virtual environment named .venv, activate it, and install the requirements.
@@ -37,14 +37,14 @@ Open a terminal (VS Code menu "View" / "Terminal") in the root project folder an
 shiny run --reload --launch-browser app/app.py
 Open a browser to http://127.0.0.1:8000/ and test the app.
 
-Run Locally - Subsequent Starts
+# Run Locally - Subsequent Starts
 Open a terminal (VS Code menu "View" / "Terminal") in the root project folder and run these commands.
 
 .venv\Scripts\Activate
 shiny run --reload --launch-browser app/app.py
 While the app is running, the terminal is fully engaged and cannot be used for other commands. To kill the terminal, click the trashcan icon in the VS Code terminal window.
 
-After Changes, Export to Docs Folder
+# After Changes, Export to Docs Folder
 Export to docs folder and test GitHub Pages locally.
 
 Open a new terminal (VS Code menu "Terminal" / "New Terminal") in the root project folder and run these commands. Remember to activate the environment first.
@@ -55,11 +55,11 @@ shinylive export app docs
 py -m http.server --directory docs --bind localhost 8008
 Open a browser to http://[::1]:8008/ and test the Pages app.
 
-Push Changes back to GitHub
+# Push Changes back to GitHub
 Open a terminal (VS Code menu "Terminal" / "New Terminal") in the root project folder and run these commands.
 
 git add .
 git commit -m "Useful commit message"
 git push -u origin main
-Enable GitHub Pages
+# Enable GitHub Pages
 Go to your GitHub repo settings and enable GitHub Pages for the docs folder.
