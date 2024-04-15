@@ -1,5 +1,6 @@
-# cintel-07-tdash Project
-April 15,2024
+#  cintel-07-tdash Project
+## April 15, 2024
+## Vashti Gambol
 PyShiny Basic Dashboard (Penguins)
 Tools
 Python
