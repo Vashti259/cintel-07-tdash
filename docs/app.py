@@ -1,8 +1,6 @@
 # By Vashti Gambol, April 18 2024
 # Import Shiny,Python and Icon packages as needed
 import matplotlib.pyplot as plt
-
-# Import modules for modeling
 import pandas as pd
 import seaborn as sns
 
@@ -80,13 +78,12 @@ with ui.layout_column_wrap(fill=False):
         def bill_length():
             return f"{filtered_df()['bill_length_mm'].mean():.1f} mm"
 
-    with ui.value_box(showcase=icon_svg("ruler-vertical")):
+    with ui.value_box(showcase=icon_svg("ruler-horizontal")):
         "Average bill depth"
 
         @render.text
         def bill_depth():
             return f"{filtered_df()['bill_depth_mm'].mean():.1f} mm"
-
 
 # ui.include_css(app_dir / "styles.css")
 
