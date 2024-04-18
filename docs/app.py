@@ -3,16 +3,13 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
-
 # importing icon_svg for icons
 from faicons import icon_svg
-
 # imports theme from shinyswatch to allow for appearance changes
 from shiny import reactive  # importing reactive from shiny
 import shinyswatch  # import shinyswatch to allow for changes in appearance
 from shiny.express import input, render, ui  # importing components from shiny
 import palmerpenguins  # importing pendguin data set
-
 shinyswatch.theme.united()
 
 # loading palmer penguins data set
@@ -121,7 +118,6 @@ def filtered_df():
     filt_df = df[df["species"].isin(input.species())]
     filt_df = filt_df.loc[filt_df["body_mass_g"] < input.mass()]
     return filt_df
-
 
 # adding dark mode
 @reactive.effect
