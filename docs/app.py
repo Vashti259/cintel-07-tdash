@@ -1,15 +1,29 @@
+# By Vashti Gambol, April 18 2024
+# Import Shiny,Python and Icon packages as needed
+import matplotlib.pyplot as plt
+
+# Import modules for modeling
+import pandas as pd
 import seaborn as sns
+
+# importing icon_svg for icons
 from faicons import icon_svg
 
-from shiny import reactive
-from shiny.express import input, render, ui
-import palmerpenguins 
+# imports theme from shinyswatch to allow for appearance changes
+from shiny import reactive  # importing reactive from shiny
+import shinyswatch  # import shinyswatch to allow for changes in appearance
+from shiny.express import input, render, ui  # importing components from shiny
+import palmerpenguins  # importing pendguin data set
 
+shinyswatch.theme.united()
+
+# loading palmer penguins data set
 df = palmerpenguins.load_penguins()
 
-ui.page_opts(title="Penguins dashboard", fillable=True)
+# Page options and setting up title
+ui.page_opts(title="Vashti's Updated Penguins Dashboard", fillable=True)
 
-
+# creating a sidebar for inputs
 with ui.sidebar(title="Filter controls"):
     ui.input_slider("mass", "Mass", 2000, 6000, 6000)
     ui.input_checkbox_group(
@@ -22,34 +36,37 @@ with ui.sidebar(title="Filter controls"):
     ui.h6("Links")
     ui.a(
         "GitHub Source",
-        href="https://github.com/denisecase/cintel-07-tdash",
+        href="https://github.com/Vashti259/cintel-07-tdash",
         target="_blank",
-    )
+    )  # adding hyperlink
     ui.a(
         "GitHub App",
-        href="https://denisecase.github.io/cintel-07-tdash/",
+        href="https://vashti259.github.io/cintel-07-tdash",
         target="_blank",
-    )
+    )  # adding hyperlink
     ui.a(
         "GitHub Issues",
-        href="https://github.com/denisecase/cintel-07-tdash/issues",
+        href="https://github.com/Vashti259/issues",
         target="_blank",
-    )
+    )  # adding hyperlink
     ui.a("PyShiny", href="https://shiny.posit.co/py/", target="_blank")
     ui.a(
         "Template: Basic Dashboard",
         href="https://shiny.posit.co/py/templates/dashboard/",
         target="_blank",
     )
+
+    ui.input_radio_buttons("dark_mode", "Dark Mode:", ["Yes", "Yes"], selected="Yes")
+
     ui.a(
         "See also",
         href="https://github.com/denisecase/pyshiny-penguins-dashboard-express",
         target="_blank",
     )
 
-
+# creating a layout to display outputs
 with ui.layout_column_wrap(fill=False):
-    with ui.value_box(showcase=icon_svg("earlybirds")):
+    with ui.value_box(showcase=icon_svg("earlybirds")):  # including value box
         "Number of penguins"
 
         @render.text
@@ -71,8 +88,10 @@ with ui.layout_column_wrap(fill=False):
             return f"{filtered_df()['bill_depth_mm'].mean():.1f} mm"
 
 
+# ui.include_css(app_dir / "styles.css")
+
 with ui.layout_columns():
-    with ui.card(full_screen=True):
+    with ui.card(full_screen=True):  # adding a card to present scatterplot
         ui.card_header("Bill length and depth")
 
         @render.plot
@@ -85,7 +104,7 @@ with ui.layout_columns():
             )
 
     with ui.card(full_screen=True):
-        ui.card_header("Penguin da")
+        ui.card_header("Penguin data")
 
         @render.data_frame
         def summary_statistics():
@@ -99,11 +118,24 @@ with ui.layout_columns():
             return render.DataGrid(filtered_df()[cols], filters=True)
 
 
-#ui.include_css(app_dir / "styles.css")
-
-
+# reactive function to filter data frame based on inputs
 @reactive.calc
 def filtered_df():
     filt_df = df[df["species"].isin(input.species())]
     filt_df = filt_df.loc[filt_df["body_mass_g"] < input.mass()]
     return filt_df
+
+
+# adding dark mode
+@reactive.effect
+@reactive.event(input.make_dark)
+def _():
+    ui.update_dark_mode("dark")
+
+
+@reactive.effect
+def _():
+    if input.dark_mode() == "Yes":
+        ui.update_dark_mode("dark")
+    else:
+        ui.update_dark_mode("light")
